@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/student_portal.css">
+  <link rel="icon" type="image/png" href="images/results-icon-png-17974-removebg-preview.png"">
+  <link
+    href="
+    https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Science+Gothic:wght@100..900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap" rel="stylesheet">
+  <title>Student Results</title>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- Student Profile Card -->
+    <div class="card">
+      <h2>Welcome, <span id="studentName">Student</span> 👋</h2>
+      <div class="info">
+        <p><strong>Matric Number:</strong> <span id="matricNo">Loading...</span></p>
+        <p><strong>Department:</strong> <span id="department">Loading...</span></p>
+        <p><strong>Level:</strong> <span id="level">Loading...</span></p>
+      </div>
+    </div>
+
+    <!-- Menu Options -->
+    <div class="card">
+      <h2>Quick Actions</h2>
+      <!-- View Results Button -->
+      <div class="menu_con">
+        <a id="resultsBtn" class="menu-btn">📄 View Results
+          <img src="images/corner.png" width="15px" height="15px" alt="">
+          <img src="images/corner.png" width="15px" height="15px" alt="">
+        </a>
+        <a id="printBtn" class="menu-btn">📄 Print transcript
+          <img src="images/corner.png" width="15px" height="15px" alt="">
+          <img src="images/corner.png" width="15px" height="15px" alt="">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Extract student_id from URL
+    const params = new URLSearchParams(window.location.search);
+    const studentId = params.get("id");
+
+    // Bind the student_id to the results page link
+    document.getElementById("resultsBtn").href =
+      studentId ? `/cgi-bin/student_results.py?student_id=${studentId}` : `/cgi-bin/student_results.py`;
+
+    // Fetch student profile data (prefer session if no id in URL)
+    const infoUrl = studentId ? `/cgi-bin/get_student_info.py?id=${studentId}` : `/cgi-bin/get_student_info.py`;
+    fetch(infoUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          document.getElementById("studentName").textContent = "Unknown Student";
+          return;
+        }
+
+        document.getElementById("studentName").textContent =
+          data.first_name + " " + data.last_name;
+
+        document.getElementById("matricNo").textContent =
+          data.matric_no;
+        document.getElementById("level").textContent =
+          data.level;
+
+        document.getElementById("department").textContent =
+          data.department;
+      })
+      .catch(err => {
+        console.error("Error fetching student info:", err);
+      });
+  </script>
+
+
+</body>
+
+</html>

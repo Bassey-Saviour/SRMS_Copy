@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/student.css">
+  <link rel="icon" type="image/png" href="images/results-icon-png-17974-removebg-preview.png"">
+  <link
+    href="
+    https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Science+Gothic:wght@100..900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap" rel="stylesheet">
+  <title>Upload Results</title>
+</head>
+
+<body>
+
+
+  <div class="header">
+    <h1>Upload Student Result</h1>
+  </div>
+
+  <div class="form-wrapper">
+    <form action="/cgi-bin/student_results.py" method="post">
+      <h2>
+        login
+      </h2>
+      <div class="input-group">
+        <input type="text" autocomplete="off" name="matric_no" required>
+        <label for="">
+          Lecturer ID
+        </label>
+      </div>
+      <div class="input-group">
+        <input type="password" name="password" required>
+        <label for="">
+          password
+        </label>
+      </div>
+
+      <button type="submit">Log In
+        <img src="images/corner.png" width="15px" height="15px" alt="">
+        <img src="images/corner.png" width="15px" height="15px" alt="">
+      </button>
+    </form>
+
+  </div>
+
+
+
+
+  <!-- <form action="/cgi-bin/upload_results.py" method="post">
+
+    <label>Student ID</label>
+    <input type="number" name="student_id" required>
+
+    <label>Course ID</label>
+    <input type="number" name="course_id" required>
+
+    <label>Score</label>
+    <input type="number" name="score" required>
+
+    <button type="submit">Upload Result</button>
+  </form> -->
+</body>
+
+</html>

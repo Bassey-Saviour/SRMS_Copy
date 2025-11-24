@@ -1,0 +1,97 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Roboto Slab", sans-serif;
+	padding: 20px;
+	background: #102542;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	gap: 50px;
+	height: 100vh;
+}
+
+.bg-img {
+	position: absolute;
+	z-index: -1;
+	right: 0;
+}
+
+.header {
+	display: inline-block;
+	text-align: left;
+	margin-left: 40px;
+	width: 500px;
+	overflow: wrap;
+}
+
+.typed-out {
+	font-family: "Stack Sans Notch", sans-serif;
+	font-size: 80px;
+	font-weight: 900;
+	color: #f87060;
+	overflow: hidden;
+	border-right: 0.15em solid orange;
+	width: 0;
+	height: 100px;
+	white-space: wrap;
+	animation: typing 5.5s steps(30, end) forwards infinite;
+}
+
+.menu {
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+	margin: auto;
+}
+
+.menu a {
+	border-radius: 6px;
+	padding: 19px;
+	margin: 15px 0;
+	text-align: center;
+	background: #1b4965;
+	color: white;
+	text-decoration: none;
+	transition: 0.3s ease-in;
+	position: relative;
+}
+
+.menu a img:nth-child(1) {
+	position: absolute;
+	left: 0;
+	top: 0;
+	/* transform: translateY(-50%); */
+}
+.menu a img:nth-child(2) {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	transform: rotate(180deg);
+}
+
+.menu a:hover {
+	background: #f87060;
+}
+@keyframes typing {
+	0% {
+		width: 0;
+	}
+	30% {
+		width: 100%;
+	}
+	50% {
+		width: 100%;
+	}
+	80% {
+		width: 0%;
+	}
+	100% {
+		width: 0%;
+	}
+}
