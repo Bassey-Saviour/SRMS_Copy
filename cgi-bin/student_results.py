@@ -49,6 +49,7 @@ def print_header():
         </style>
     </head>
     <body>
+    <img src="/public/images/image-removebg-preview.png" class="bg-img" alt="">
     <div class="container">
     """)
 

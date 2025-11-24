@@ -15,6 +15,14 @@ body {
 	gap: 100px;
 }
 
+.bg-img {
+	position: absolute;
+	z-index: -1;
+	right: 0;
+	opacity: 0.2;
+	width: 1100px;
+}
+
 .header {
 	display: inline-block;
 	text-align: left;
