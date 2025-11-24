@@ -25,6 +25,10 @@ body {
 }
 
 .header {
+	/* display: inline-block;
+	text-align: left;
+	margin-left: 40px;
+	max-width: 500px; Changed to max-width */
 	display: inline-block;
 	text-align: left;
 	margin-left: 40px;
@@ -33,6 +37,20 @@ body {
 }
 
 .typed-out {
+	/* font-family: "Stack Sans Notch", sans-serif;
+	font-size: 80px;
+	font-weight: 900;
+	color: #f87060;
+	display: inline-block;
+	overflow: hidden; */
+
+	/* border-right: 0.15em solid orange; */
+
+	/* white-space: normal; /* Allow wrapping
+	word-wrap: break-word; */
+	/* animation: typing 3s steps(35, end) forwards, blink 1.2s step-end infinite; */
+	/*max-width: 0; /* Start hidden */
+
 	font-family: "Stack Sans Notch", sans-serif;
 	font-size: 80px;
 	font-weight: 900;
@@ -82,18 +100,28 @@ body {
 }
 @keyframes typing {
 	0% {
-		width: 0;
+		max-width: 0;
 	}
 	30% {
-		width: 100%;
+		max-width: 100%;
 	}
 	50% {
-		width: 100%;
+		max-width: 100%;
 	}
 	80% {
-		width: 0%;
+		max-width: 0%;
 	}
 	100% {
-		width: 0%;
+		max-width: 0%;
+	}
+}
+
+@keyframes blink {
+	from,
+	to {
+		border-color: transparent;
+	}
+	50% {
+		border-color: orange;
 	}
 }
