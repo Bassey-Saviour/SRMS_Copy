@@ -145,7 +145,7 @@ def main():
 
         # Back button to student portal (portal will use session)
         print(f"""
-        <a class='menu-btn res' href="/public/student_portal.html">
+        <a class='menu-btn' href="/public/student_portal.html">
         &#8678 Back to Dashboard
         <img src="/public/images/corner.png" width="15px" height="15px" alt="">
         <img src="/public/images/corner.png" width="15px" height="15px" alt="">

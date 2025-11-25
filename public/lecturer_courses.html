@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/student_portal.css">
+  <link rel="icon" type="image/png" href="images/results-icon-png-17974-removebg-preview.png">
+  <link
+    href="
+    https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Science+Gothic:wght@100..900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap" rel="stylesheet">
+  <title>My Courses</title>
+  <style>
+    .courses-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .course-card {
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      padding: 1.5rem;
+      background-color: #f9f9f9;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .course-card:hover {
+      border-color: #007bff;
+      box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+    }
+
+    .course-card h3 {
+      margin: 0 0 0.5rem 0;
+      color: #007bff;
+    }
+
+    .course-card p {
+      margin: 0.25rem 0;
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .course-card .code {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .course-card .credits {
+      color: #777;
+      font-size: 0.85rem;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: #666;
+    }
+
+    .error {
+      background-color: #fee;
+      color: #c00;
+      padding: 1rem;
+      border-radius: 4px;
+      margin: 1rem 0;
+    }
+
+    .card h1 {
+      color: #333;
+      font-weight: 800;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="images/image-removebg-preview.png" class="bg-img" alt="">
+  <div class="container">
+
+    <div class="card">
+      <h1>My Courses</h1>
+      <p><a href="/public/lecturer_portal.html" class="menu-btn">&#8678 Back to Portal
+          <img src="images/corner.png" width="15px" height="15px" alt="">
+          <img src="images/corner.png" width="15px" height="15px" alt="">
+        </a></p>
+    </div>
+
+    <div id="coursesContainer" class="courses-container">
+      <div class="loading">Loading courses...</div>
+    </div>
+
+  </div>
+
+  <script>
+    // Fetch lecturer's courses
+    fetch(`/cgi-bin/get_lecturer_courses.py`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          document.getElementById("coursesContainer").innerHTML = `
+            <div class="error">Error: ${data.error}</div>
+          `;
+          return;
+        }
+
+        if (!data.courses || data.courses.length === 0) {
+          document.getElementById("coursesContainer").innerHTML = `
+            <div class="error">No courses assigned.</div>
+          `;
+          return;
+        }
+
+        const html = data.courses.map(course => `
+          <div class="course-card" onclick="window.location.href='/cgi-bin/grade_course.py?course_id=${course.course_id}'">
+            <h3>${course.course_title}</h3>
+            <p class="code">${course.course_code}</p>
+            <p class="credits">${course.credit_units} credit unit(s)</p>
+            <p style="margin-top: 1rem; color: #007bff; font-size: 0.9rem;">Click to grade students &#8680</p>
+          </div>
+        `).join('');
+
+        document.getElementById("coursesContainer").innerHTML = html;
+      })
+      .catch(err => {
+        document.getElementById("coursesContainer").innerHTML = `
+          <div class="error">Error fetching courses: ${err.message}</div>
+        `;
+      });
+  </script>
+
+</body>
+
+</html>
