@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 # Student-Result-Management-System
 
 A system for management results of students in a school, for COSC 333 / ITGY 401
 
-# Student Result Management System (SR MS)
+# Student Result Management System (SRMS)
 
 ## Project Structure
 
@@ -40,7 +39,7 @@ student_result_management_system/
    ```bash
    python3 -m http.server --cgi 8000
    ```
-=======
+
 # SRMS_Copy
-Personal copy of the student result management system 
->>>>>>> dd911fee4c7d57bd34f8820429c4ebbc217c5af6
+
+Personal copy of the student result management system

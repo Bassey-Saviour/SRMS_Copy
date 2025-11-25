@@ -4,11 +4,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="css/student_portal.css">
+  <link rel="icon" type="image/png" href="images/results-icon-png-17974-removebg-preview.png">
+  <link
+    href="
+    https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Science+Gothic:wght@100..900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap" rel="stylesheet">
+  <title>Lecturer Portal</title>
 </head>
 
 <body>
-  hello world
+  <img src="images/image-removebg-preview.png" class="bg-img" alt="">
+  <div class="container">
+
+    <div class="card">
+      <h2>Welcome, <span id="lecturerName">Lecturer</span> </h2>
+      <p><strong>Lecturer ID:</strong> <span id="lecturerId">Loading...</span></p>
+      <p><strong>Department:</strong> <span id="lecturerDept">Loading...</span></p>
+    </div>
+
+    <div class="card">
+      <h2>Actions</h2>
+      <div class="menu_con">
+        <a id="uploadBtn" class="menu-btn">Upload Results
+          <img src="images/corner.png" width="15px" height="15px" alt="">
+          <img src="images/corner.png" width="15px" height="15px" alt="">
+        </a>
+        <a id="coursesBtn" class="menu-btn">View Courses Assigned
+          <img src="images/corner.png" width="15px" height="15px" alt="">
+          <img src="images/corner.png" width="15px" height="15px" alt="">
+        </a>
+        <a id="logoutBtn" class="menu-btn" href="/cgi-bin/logout.py">🔒 Logout
+          <img src="images/corner.png" width="15px" height="15px" alt="">
+          <img src="images/corner.png" width="15px" height="15px" alt="">
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Fetch lecturer info using session (no URL id param needed)
+    fetch(`/cgi-bin/get_lecturer_info.py`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          console.error(data.error);
+          document.getElementById("lecturerName").textContent = "Error loading profile";
+          return;
+        }
+
+        document.getElementById("lecturerName").textContent =
+          data.first_name + " " + data.last_name;
+
+        document.getElementById("lecturerId").textContent =
+          data.lecturer_id;
+
+        document.getElementById("lecturerDept").textContent =
+          data.department;
+      });
+
+    // Bind navigation links (no id param needed; session is used server-side)
+    document.getElementById("uploadBtn").href = `/cgi-bin/upload_results.py`;
+    document.getElementById("coursesBtn").href = `/cgi-bin/lecturer_courses.py`;
+  </script>
+
 </body>
 
 </html>
