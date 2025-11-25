@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
 --
--- Host: localhost    Database: mydb
+-- Host: localhost    Database: result copy
 -- ------------------------------------------------------
 -- Server version	8.0.43
 
@@ -86,6 +86,7 @@ CREATE TABLE `lecturer` (
   `last_name` varchar(50) NOT NULL,
   `email` varchar(45) NOT NULL,
   `department_id` int NOT NULL,
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`lecturer_id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `department_id_idx` (`department_id`),
@@ -99,7 +100,7 @@ CREATE TABLE `lecturer` (
 
 LOCK TABLES `lecturer` WRITE;
 /*!40000 ALTER TABLE `lecturer` DISABLE KEYS */;
-INSERT INTO `lecturer` VALUES (1,'Seun','Okafor','seun.okafor@school.edu',1),(2,'Dondada','Alfred','donda.alfred@school.edu',2),(3,'Amina','Bello','amina.bello@school.edu',2),(4,'Famudims','Ayankoo','famudims.aya@school.edu',1);
+INSERT INTO `lecturer` VALUES (1,'Seun','Okafor','seun.okafor@school.edu',1,'$2b$12$ZwN8BWZNteOMFnJwtiBfYOZOzx8yQlV8soVhEpnQzfeVYtgInWQZO'),(2,'Dondada','Alfred','donda.alfred@school.edu',2,'$2b$12$SnwAUX4yZFizGO.vGc0Xce14Sc2xJzggzaBZ1vV//T5o.lCaBkQ/y'),(3,'Amina','Bello','amina.bello@school.edu',2,'$2b$12$FOvqSitpWJhvgDkw61FlsefsczxrnCa7JMdbcxs6Hu9SjbwSOKfhG'),(4,'Famudims','Ayankoo','famudims.aya@school.edu',1,'$2b$12$LmlqurqRa5NV1aiB8bMBr.tp74L.a4swJQoH0mfFS5LU2Ao7ZAMce');
 /*!40000 ALTER TABLE `lecturer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +132,7 @@ CREATE TABLE `result` (
 
 LOCK TABLES `result` WRITE;
 /*!40000 ALTER TABLE `result` DISABLE KEYS */;
-INSERT INTO `result` VALUES (1,1,1,82,'A'),(2,1,2,74,'B'),(3,2,1,83,'A'),(4,2,2,79,'B'),(5,3,1,81,'A'),(6,3,2,88,'A'),(7,4,3,66,'C'),(8,4,4,90,'A'),(9,5,3,71,'B'),(10,5,4,95,'A');
+INSERT INTO `result` VALUES (1,1,1,67,'C'),(2,1,2,74,'B'),(3,2,1,83,'A'),(4,2,2,79,'B'),(5,3,1,81,'A'),(6,3,2,88,'A'),(7,4,3,70,'B'),(8,4,4,90,'A'),(9,5,3,61,'B'),(10,5,4,95,'A');
 /*!40000 ALTER TABLE `result` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,6 +151,7 @@ CREATE TABLE `student` (
   `email` varchar(45) NOT NULL,
   `level` int NOT NULL,
   `department_id` int NOT NULL,
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`student_id`),
   UNIQUE KEY `matric_no_UNIQUE` (`matric_no`),
   UNIQUE KEY `email_UNIQUE` (`email`),
@@ -164,7 +166,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'22/0001','Saviour','Bassey','saviour@student.edu',400,1),(2,'22/0002','Sophia','Odiase','sophia@student.edu',400,1),(3,'22/0003','Prince','Nnamani','prince@student.edu',400,1),(4,'22/0004','Paul','Koroye','paul@student.edu',400,2),(5,'22/0010','Adeola','Shinaayomi','adeola@student.edu',400,2);
+INSERT INTO `student` VALUES (1,'22/0001','Saviour','Bassey','saviour@student.edu',400,1,'$2b$12$JvDgd7clF4zykpf9APYuAOdt7xZ5v3N36/QWccjieQvFXgq6WAEsO'),(2,'22/0002','Sophia','Odiase','sophia@student.edu',400,1,'$2b$12$nH5Ock.KnhMQeQFXvrAon.fQcPPu4Axfi2VOBnRTYLbNjdMtgwOBa'),(3,'22/0003','Prince','Nnamani','prince@student.edu',400,1,'$2b$12$Q/euhkyYepJzxHN00JZKJutZjthwSDj85wqmTaFcYXij8qzvNhWWS'),(4,'22/0004','Paul','Koroye','paul@student.edu',400,2,'$2b$12$9xENgh34B6.5LESn3t2hNOLi1vN1Zp5l19vmbPwuMviyHKRG6lTpy'),(5,'22/0010','Adeola','Shinaayomi','adeola@student.edu',400,2,'$2b$12$jlva9VMb9JL0XtkLTMOnbuS/fx3bPiBb.HYT5LTZGrap1K6wVuvuu');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -177,4 +179,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-21  0:15:33
+-- Dump completed on 2025-11-25 11:47:30
