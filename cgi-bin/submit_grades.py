@@ -63,39 +63,43 @@ def main():
 
         # Collect all submitted grades
         # Parse form: score_<result_id>, grade_<result_id>
-        all_form_keys = form.keys()
+        result_ids_str = form.getvalue("result_ids", "")
+        result_ids = [rid.strip() for rid in result_ids_str.split(",") if rid.strip()]
+        
         updates = []
     
-        for key in all_form_keys:
-            if key.startswith("score_"):
-                result_id = key[6:]  # Remove "score_" prefix
-                score_val = form.getvalue(f"score_{result_id}")
-                grade_val = form.getvalue(f"grade_{result_id}")
-            
-                # Convert empty string to NULL (None)
-                score = int(score_val) if score_val and score_val.strip() else None
-                grade = grade_val.strip().upper() if grade_val and grade_val.strip() else None
-            
-                updates.append((score, grade, result_id))
+        for result_id in result_ids:
+            score_val = form.getvalue(f"score_{result_id}", "")
+            grade_val = form.getvalue(f"grade_{result_id}", "")
+        
+            # Convert empty string to NULL (None)
+            score = int(score_val) if score_val and score_val.strip() else None
+            grade = grade_val.strip().upper() if grade_val and grade_val.strip() else None
+        
+            updates.append((score, grade, result_id))
 
-        # Update all results
+        # Update all results (verify result belongs to this course)
         updated_count = 0
         for score, grade, result_id in updates:
             cursor.execute(
-                "UPDATE result SET score = %s, grade = %s WHERE result_id = %s",
-                (score, grade, result_id)
+                "UPDATE result SET score = %s, grade = %s WHERE result_id = %s AND course_id = %s",
+                (score, grade, result_id, course_id)
             )
             updated_count += cursor.rowcount
     
         db.commit()
 
         print_header()
+        # # Debug: show what was sent
+        # debug_updates = []
+        # for score, grade, result_id in updates:
+        #     debug_updates.append(f"Result {result_id}: score={score}, grade={grade}")
+        
         # html_header("Grades Submitted")
         print(f"""
         <div class="card">
             <h2>&#10004 Grades Submitted Successfully</h2>
             <p>Updated {updated_count} student record(s).</p>
-            <p>
                 <a href="/public/lecturer_portal.html"       class="menu-btn">
                 &#8678 Back to Portal
                 <img src="/public/images/corner.png"    width="15px" height="15px" alt="">

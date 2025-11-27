@@ -63,15 +63,57 @@ def print_header():
             }
             
             button[type="submit"] {
-                # padding: 10px 20px;
-                background-color: #1b4965;
-                color: white;
                 border: none;
-                border-radius: 4px;
-                cursor: pointer;
                 font-family: "Roboto Slab", serif;
             }
         </style>
+        <script>
+            function getGradeFromScore(score) {
+                score = parseInt(score);
+                if (isNaN(score)) return '';
+                if (score >= 80) return 'A';
+                if (score >= 60) return 'B';
+                if (score >= 50) return 'C';
+                if (score >= 45) return 'D';
+                if (score >= 40) return 'E';
+                if (score >= 0) return 'F';
+
+                return '';
+            }
+
+            function autoFillGrade(resultId) {
+                const scoreInput = document.querySelector(`input[name="score_${resultId}"]`);
+                const gradeInput = document.querySelector(`input[name="grade_${resultId}"]`);
+                
+                if (scoreInput && gradeInput) {
+                    // If score is empty or cleared, clear the grade
+                    if (!scoreInput.value || scoreInput.value.trim() === '') {
+                        gradeInput.value = '';
+                    } else {
+                        const grade = getGradeFromScore(scoreInput.value);
+                        if (grade) {
+                            gradeInput.value = grade;
+                        } else {
+                            gradeInput.value = '';
+                        }
+                    }
+                }
+            }
+
+            window.addEventListener('DOMContentLoaded', function() {
+                const scoreInputs = document.querySelectorAll('input[type="number"][name*="score_"]');
+                scoreInputs.forEach(input => {
+                    input.addEventListener('change', function() {
+                        const resultId = this.name.replace('score_', '');
+                        autoFillGrade(resultId);
+                    });
+                    input.addEventListener('input', function() {
+                        const resultId = this.name.replace('score_', '');
+                        autoFillGrade(resultId);
+                    });
+                });
+            });
+        </script>
     </head>
     <body>
     <img src="/public/images/image-removebg-preview.png" class="bg-img" alt="">
@@ -153,6 +195,11 @@ def main():
                 <form method="POST" action="/cgi-bin/submit_grades.py">
             """)
             print(f'<input type="hidden" name="course_id" value="{course_id}">')
+            
+            # Add hidden field with all result IDs so we know which ones to update
+            result_ids = [str(row[4]) for row in rows]
+            print(f'<input type="hidden" name="result_ids" value="{",".join(result_ids)}">')
+            
             print("""
                     <table>
                         <thead>
@@ -182,14 +229,7 @@ def main():
                                     min="0" max="100">
                                 </td>
                                 <td>
-                                    <select name="grade_{result_id}" >
-                                        <option value="A" {('selected' if grade_val=='A' else '')}>A</option>
-                                        <option value="B" {('selected' if grade_val=='B' else '')}>B</option>
-                                        <option value="C" {('selected' if grade_val=='C' else '')}>C</option>
-                                        <option value="D" {('selected' if grade_val=='D' else '')}>D</option>
-                                        <option value="E" {('selected' if grade_val=='E' else '')}>E</option>
-                                        <option value="F" {('selected' if grade_val=='F' else '')}>F</option>
-                                    </select>
+                                    <input type="text" name="grade_{result_id}" value="{grade_val}" readonly>
                                 </td>
                             </tr>
                 """)
