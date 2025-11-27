@@ -82,6 +82,9 @@
       .catch(err => {
         console.error("Error fetching student info:", err);
       });
+
+    document.getElementById("printBtn").href =
+      studentId ? `/cgi-bin/transcript.py?student_id=${studentId}` : `/cgi-bin/transcript.py`;
   </script>
 
 

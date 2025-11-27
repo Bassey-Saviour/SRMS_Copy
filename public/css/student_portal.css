@@ -75,12 +75,6 @@ body {
 	width: 250px;
 }
 
-/* .menu-btn.res {
-	margin-left: 0;
-	margin-right: auto;
-	width: fit-content;
-} */
-
 .menu-btn img:nth-child(1) {
 	position: absolute;
 	left: 0;
