@@ -24,11 +24,8 @@ def print_header():
                 font-family: 'Roboto Slab', serif;
             }
 
-            .container {
-                width: 90%;
-                max-width: 1000px;
-                margin: auto;
-                padding-top: 40px;
+            .container {   
+                max-width: 1000px;       
             }
 
             table {
@@ -36,7 +33,7 @@ def print_header():
                 background: white;
                 margin: 20px 0;
             }
-
+            
             th, td {
                 padding: 12px;
                 border: 1px solid #ccc;
