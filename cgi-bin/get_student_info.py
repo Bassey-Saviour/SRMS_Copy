@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import cgi
 import json
 from db_config import get_connection
